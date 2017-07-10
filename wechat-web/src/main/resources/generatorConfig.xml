@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<!-- 本地数据库连接jar -->
+	<classPathEntry location="F:\maven_repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+
+	<context id="testTables" targetRuntime="MyBatis3">
+
+		<!--<commentGenerator>
+			&lt;!&ndash; 是否去除自动生成的注释 true：是 ： false:否 &ndash;&gt;
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>-->
+		<!--配置插件-->
+		<!-- generate entity时，生成tostring 方法，便于日志记录和debug-->
+		<!-- <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/> -->
+
+		<!-- generate entity时，生成hashcode和equals方法 -->
+		<!--<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />-->
+		<!-- generate entity时，生成serialVersionUID ,效率太低 不建议使用-->
+		<!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin" /> -->
+
+
+		<commentGenerator type="org.mybatis.generator.internal.DG2CommentGenerator">
+			<property name="javaFileEncoding" value="UTF-8"/>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<!--建议一定要保留suppressAllComments属性(设为true)时间戳suppressDate，避免重复提交SVN。-->
+			<property name="suppressAllComments" value="false" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/zjcap_voa" userId="root" password="root">
+		</jdbcConnection>
+
+		<!-- JDBC DECIMAL  和 NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="cn.zjcap.voa.model"
+			targetProject="../zjcap-voa-manage-model/src/main/java">
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="cn.zjcap.voa.mapper"
+			targetProject="../zjcap-voa-manage-mapper/src/main/java">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.zjcap.voa.mapper"
+			 targetProject="../zjcap-voa-manage-mapper/src/main/java">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<!-- 指定数据库表 -->
+		<table schema="" tableName="tb_user" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"/>
+		
+	</context>
+</generatorConfiguration>
